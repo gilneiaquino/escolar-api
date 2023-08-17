@@ -1,12 +1,12 @@
 package br.com.escolar.colecoes;
-import br.com.escolar.enums.TipoTurno;
+
 import org.springframework.data.annotation.Id;
-        import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection = "alunos")
-public class Aluno {
+@Document(collection = "professores")
+public class Professor {
 
     @Id
     private String id;
@@ -15,7 +15,7 @@ public class Aluno {
     private String genero;
     private Endereco endereco;
     private List<Telefone> telefones;
-    private List<Mensalidade> mensalidades;
+    private List<Disciplina> disciplinasLecionadas;
     // Outros atributos
 
     // Construtores, getters e setters

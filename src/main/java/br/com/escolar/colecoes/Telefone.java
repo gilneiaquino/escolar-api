@@ -1,16 +1,16 @@
 package br.com.escolar.colecoes;
 
-import br.com.escolar.enums.FormaPagamento;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Pagamento")
-public class Pagamento {
+@Document(collection = "Telefone")
+public class Telefone {
 
     @Id
     private String id;
 
-    private FormaPagamento formaPagamento;
+    private String numero;
+    private String tipo;
 
     public String getId() {
         return id;
