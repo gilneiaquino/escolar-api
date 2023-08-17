@@ -1,4 +1,5 @@
 package br.com.escolar.colecoes;
+import br.com.escolar.enums.TipoTurno;
 import org.springframework.data.annotation.Id;
         import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,5 +12,6 @@ public class Aluno {
     private String nome;
     private int idade;
 
+    private TipoTurno turno;
     // Construtores, getters e setters
 }
