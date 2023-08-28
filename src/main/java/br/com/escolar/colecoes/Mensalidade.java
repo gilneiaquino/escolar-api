@@ -9,7 +9,7 @@ import java.util.Date;
 public class Mensalidade {
 
     @Id
-    private String id;
+    private Long id;
     private Aluno aluno;
     private double valor;
     private String dataVencimento;
@@ -17,11 +17,11 @@ public class Mensalidade {
     private boolean pago;
     private FormaPagamento formaPagamento;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

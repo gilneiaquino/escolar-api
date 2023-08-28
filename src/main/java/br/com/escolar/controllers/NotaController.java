@@ -24,7 +24,7 @@ public class NotaController {
     }
 
     @GetMapping("/{id}")
-    public Nota getNotaById(@PathVariable String id) {
+    public Nota getNotaById(@PathVariable Long id) {
         return notaRepository.findById(id).orElse(null);
     }
 
@@ -34,13 +34,13 @@ public class NotaController {
     }
 
     @PutMapping("/{id}")
-    public Nota updateNota(@PathVariable String id, @RequestBody Nota nota) {
+    public Nota updateNota(@PathVariable Long id, @RequestBody Nota nota) {
         nota.setId(id);
         return notaRepository.save(nota);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteNota(@PathVariable String id) {
+    public void deleteNota(@PathVariable Long id) {
         notaRepository.deleteById(id);
     }
 }

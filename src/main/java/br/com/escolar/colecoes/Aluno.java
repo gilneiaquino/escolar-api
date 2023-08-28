@@ -9,18 +9,32 @@ import java.util.List;
 public class Aluno {
 
     @Id
-    private String id;
+    private Long id;
     private String nome;
     private String dataNascimento;
     private String genero;
     private Endereco endereco;
     private List<Telefone> telefones;
 
-    public String getId() {
+    // Construtor com parâmetros
+    public Aluno(Long id, String nome, String dataNascimento, String genero, Endereco endereco, List<Telefone> telefones) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.genero = genero;
+        this.endereco = endereco;
+        this.telefones = telefones;
+    }
+
+    public Aluno() {
+        super();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

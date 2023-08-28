@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.escolar</groupId>
 	<artifactId>escolar-api</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>escolar</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -43,6 +43,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.3.1</version> <!-- Use a versão mais recente do Mockito disponível -->
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>

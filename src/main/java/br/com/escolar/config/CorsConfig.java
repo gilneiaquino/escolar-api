@@ -9,8 +9,9 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/alunos") // Defina o caminho que deseja permitir
-                .allowedOrigins("http://localhost:3000") // Defina a origem permitida (seu aplicativo React)
-                .allowedMethods("GET", "POST", "PUT", "DELETE"); // Defina os métodos HTTP permitidos
+        registry.addMapping("/**") // Defina o caminho para permitir todas as URLs
+                .allowedOrigins("*") // Permita todas as origens (qualquer origem)
+                .allowedMethods("GET", "POST", "PUT", "DELETE") // Defina os métodos HTTP permitidos
+                .allowedHeaders("*"); // Permita todos os cabeçalhos HTTP
     }
 }

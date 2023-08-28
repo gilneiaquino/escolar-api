@@ -7,6 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class EscolarApplicationTests {
 
 
+
+
+	@Test
 	void contextLoads() {
 	}
 

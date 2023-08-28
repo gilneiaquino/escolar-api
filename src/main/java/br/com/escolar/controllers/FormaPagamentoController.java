@@ -24,7 +24,7 @@ public class FormaPagamentoController {
     }
 
     @GetMapping("/{id}")
-    public FormaPagamento getFormaPagamentoById(@PathVariable String id) {
+    public FormaPagamento getFormaPagamentoById(@PathVariable Long id) {
         return formaPagamentoRepository.findById(id).orElse(null);
     }
 
@@ -34,13 +34,13 @@ public class FormaPagamentoController {
     }
 
     @PutMapping("/{id}")
-    public FormaPagamento updateFormaPagamento(@PathVariable String id, @RequestBody FormaPagamento formaPagamento) {
+    public FormaPagamento updateFormaPagamento(@PathVariable Long id, @RequestBody FormaPagamento formaPagamento) {
         formaPagamento.setId(id);
         return formaPagamentoRepository.save(formaPagamento);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFormaPagamento(@PathVariable String id) {
+    public void deleteFormaPagamento(@PathVariable Long id) {
         formaPagamentoRepository.deleteById(id);
     }
 }

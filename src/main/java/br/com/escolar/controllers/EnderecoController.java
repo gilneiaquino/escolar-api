@@ -24,7 +24,7 @@ public class EnderecoController {
     }
 
     @GetMapping("/{id}")
-    public Endereco getEnderecoById(@PathVariable String id) {
+    public Endereco getEnderecoById(@PathVariable Long id) {
         return enderecoRepository.findById(id).orElse(null);
     }
 
@@ -34,13 +34,13 @@ public class EnderecoController {
     }
 
     @PutMapping("/{id}")
-    public Endereco updateEndereco(@PathVariable String id, @RequestBody Endereco endereco) {
+    public Endereco updateEndereco(@PathVariable Long id, @RequestBody Endereco endereco) {
         endereco.setId(id);
         return enderecoRepository.save(endereco);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEndereco(@PathVariable String id) {
+    public void deleteEndereco(@PathVariable Long id) {
         enderecoRepository.deleteById(id);
     }
 }

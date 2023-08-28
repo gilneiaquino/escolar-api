@@ -8,15 +8,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Nota {
 
     @Id
-    private String id;
+    private Long id;
 
     private double valor;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

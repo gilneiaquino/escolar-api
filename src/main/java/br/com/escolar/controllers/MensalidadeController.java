@@ -24,7 +24,7 @@ public class MensalidadeController {
     }
 
     @GetMapping("/{id}")
-    public Mensalidade getMensalidadeById(@PathVariable String id) {
+    public Mensalidade getMensalidadeById(@PathVariable Long id) {
         return mensalidadeRepository.findById(id).orElse(null);
     }
 
@@ -34,13 +34,13 @@ public class MensalidadeController {
     }
 
     @PutMapping("/{id}")
-    public Mensalidade updateMensalidade(@PathVariable String id, @RequestBody Mensalidade mensalidade) {
+    public Mensalidade updateMensalidade(@PathVariable Long id, @RequestBody Mensalidade mensalidade) {
         mensalidade.setId(id);
         return mensalidadeRepository.save(mensalidade);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMensalidade(@PathVariable String id) {
+    public void deleteMensalidade(@PathVariable Long id) {
         mensalidadeRepository.deleteById(id);
     }
 }

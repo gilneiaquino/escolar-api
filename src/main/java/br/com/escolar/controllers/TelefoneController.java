@@ -24,7 +24,7 @@ public class TelefoneController {
     }
 
     @GetMapping("/{id}")
-    public Telefone getTelefoneById(@PathVariable String id) {
+    public Telefone getTelefoneById(@PathVariable Long id) {
         return telefoneRepository.findById(id).orElse(null);
     }
 
@@ -34,13 +34,13 @@ public class TelefoneController {
     }
 
     @PutMapping("/{id}")
-    public Telefone updateTelefone(@PathVariable String id, @RequestBody Telefone telefone) {
+    public Telefone updateTelefone(@PathVariable Long id, @RequestBody Telefone telefone) {
         telefone.setId(id);
         return telefoneRepository.save(telefone);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTelefone(@PathVariable String id) {
+    public void deleteTelefone(@PathVariable Long id) {
         telefoneRepository.deleteById(id);
     }
 }
