@@ -1,5 +1,4 @@
 package br.com.escolar.colecoes;
-import br.com.escolar.enums.TipoTurno;
 import org.springframework.data.annotation.Id;
         import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,17 +12,13 @@ public class Aluno {
     private String nome;
     private String dataNascimento;
     private String genero;
-    private Endereco endereco;
-    private List<Telefone> telefones;
 
     // Construtor com parâmetros
-    public Aluno(Long id, String nome, String dataNascimento, String genero, Endereco endereco, List<Telefone> telefones) {
+    public Aluno(Long id, String nome, String dataNascimento, String genero) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.genero = genero;
-        this.endereco = endereco;
-        this.telefones = telefones;
     }
 
     public Aluno() {
@@ -62,21 +57,7 @@ public class Aluno {
         this.genero = genero;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public List<Telefone> getTelefones() {
-        return telefones;
-    }
-
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
-    }
 
     // Construtores, getters e setters
 }

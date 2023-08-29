@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/alunos")
+@RequestMapping(value = "/api/alunos", produces = "application/json", consumes = "application/json")
 public class AlunoController {
     private static final Logger logger = LoggerFactory.getLogger(AlunoController.class);
 
