@@ -3,7 +3,7 @@ package br.com.escolar.colecoes;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Endereco")
+@Document(collection = "enderecos")
 public class Endereco {
 
     @Id

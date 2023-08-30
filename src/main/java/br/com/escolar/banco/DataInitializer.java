@@ -23,8 +23,8 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Crie e insira alguns alunos no banco de dados MongoDB
-        Aluno aluno1 = new Aluno(1L, "João", "1990-01-01", "Masculino");
-        Aluno aluno2 = new Aluno(2L, "Maria", "1992-03-15", "Feminino");
+        Aluno aluno1 = new Aluno(1L, "João", "1990-01-01", "Masculino",new Endereco(1L,"RUA Santos", "25","São paulo", "SP","72669316"));
+        Aluno aluno2 = new Aluno(2L, "João", "1990-01-01", "Feminino",new Endereco(1L,"RUA Lurdes", "25","São paulo", "SP","72669316"));
 
         // Salve os alunos no banco de dados
         alunoRepository.save(aluno1);

@@ -3,9 +3,11 @@ package br.com.escolar.controllers;
 import br.com.escolar.colecoes.Aluno;
 import br.com.escolar.repositorios.AlunoRepository;
 import br.com.escolar.services.AlunoService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/alunos", produces = "application/json", consumes = "application/json")
+@Validated
 public class AlunoController {
     private static final Logger logger = LoggerFactory.getLogger(AlunoController.class);
 
@@ -25,7 +28,7 @@ public class AlunoController {
     }
 
     @PostMapping
-    public Aluno criarAluno(@RequestBody Aluno aluno) {
+    public Aluno criarAluno(@Valid @RequestBody Aluno aluno) {
         return alunoService.salvarAluno(aluno);
     }
 
