@@ -13,6 +13,7 @@ public class Telefone {
     private String tipo;
 
     public Telefone(Long id, String numero, String tipo) {
+        this.id = id;
         this.numero = numero;
         this.tipo = tipo;
     }

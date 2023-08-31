@@ -27,9 +27,12 @@ public class Aluno {
 
     @DBRef
     private Endereco endereco;
+    @DBRef
+    private List<Telefone> telefone;
 
     // Construtor com parâmetros
-    public Aluno(Long id, String nome, String dataNascimento, String genero, Endereco endereco) {
+    public Aluno(Long id, String nome, String dataNascimento, String genero, Endereco endereco, List<Telefone> telefones) {
+        this.telefone = telefones;
         this.endereco = endereco;
         this.id = id;
         this.nome = nome;
@@ -81,5 +84,13 @@ public class Aluno {
         this.endereco = endereco;
     }
 
-// Construtores, getters e setters
+    public List<Telefone> getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(List<Telefone> telefone) {
+        this.telefone = telefone;
+    }
+
+    // Construtores, getters e setters
 }
