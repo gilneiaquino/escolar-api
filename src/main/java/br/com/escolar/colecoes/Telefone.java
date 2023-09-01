@@ -9,11 +9,13 @@ public class Telefone {
     @Id
     private Long id;
 
-    private String numero;
+    private  Integer ddd;
+    private Integer numero;
     private String tipo;
 
-    public Telefone(Long id, String numero, String tipo) {
+    public Telefone(Long id, Integer ddd, Integer numero, String tipo) {
         this.id = id;
+        this.ddd = ddd;
         this.numero = numero;
         this.tipo = tipo;
     }
@@ -30,11 +32,19 @@ public class Telefone {
         this.id = id;
     }
 
-    public String getNumero() {
+    public Integer getDdd() {
+        return ddd;
+    }
+
+    public void setDdd(Integer ddd) {
+        this.ddd = ddd;
+    }
+
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
@@ -45,6 +55,4 @@ public class Telefone {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-
-    // Construtores, getters e setters
 }
