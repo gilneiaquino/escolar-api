@@ -1,4 +1,5 @@
 package br.com.escolar.colecoes;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
@@ -12,13 +13,12 @@ import java.util.List;
 public class Aluno {
 
     @Id
-    private Long id;
+    private String id;
 
     @NotBlank(message = "O nome não pode estar em branco.")
     @NotNull(message = "O nome não pode ser nulo.")
     private String nome;
 
-    @NotBlank(message = "A data de nascimento não pode estar em branco.")
     @NotNull(message = "A data de nascimento não pode ser nula.")
     private LocalDate dataNascimento;
 
@@ -27,7 +27,7 @@ public class Aluno {
     private String genero;
 
     @DBRef
-    private Endereco endereco;
+    private List<Endereco> enderecos;
     @DBRef
     private List<Telefone> telefones;
 
@@ -36,9 +36,9 @@ public class Aluno {
     private String cpf;
 
     // Construtor com parâmetros
-    public Aluno(Long id, String nome, LocalDate dataNascimento, String genero, Endereco endereco, List<Telefone> telefones, String email, String cpf) {
+    public Aluno(String id, String nome, LocalDate dataNascimento, String genero,  List<Endereco>  endereco, List<Telefone> telefones, String email, String cpf) {
         this.telefones = telefones;
-        this.endereco = endereco;
+        this.enderecos = endereco;
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -51,12 +51,20 @@ public class Aluno {
         super();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNome() {
@@ -83,12 +91,12 @@ public class Aluno {
         this.genero = genero;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
     public List<Telefone> getTelefones() {

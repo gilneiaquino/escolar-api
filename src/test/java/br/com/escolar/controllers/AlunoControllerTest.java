@@ -64,7 +64,7 @@ public class AlunoControllerTest {
 
     @Test
     public void testBuscarAlunoPorId() throws Exception {
-        Long id = 1L;
+        String id = "1L";
         Aluno aluno = new Aluno();
         aluno.setId(id);
 
@@ -78,7 +78,7 @@ public class AlunoControllerTest {
 
     @Test
     public void testExcluirAluno() throws Exception {
-        Long id = 1L;
+        String id = "1L";
 
         mockMvc.perform(delete("/api/alunos/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))

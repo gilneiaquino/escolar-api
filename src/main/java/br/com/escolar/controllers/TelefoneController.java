@@ -2,6 +2,7 @@ package br.com.escolar.controllers;
 
 import br.com.escolar.colecoes.Telefone;
 import br.com.escolar.repositorios.TelefoneRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class TelefoneController {
     }
 
     @GetMapping("/{id}")
-    public Telefone getTelefoneById(@PathVariable Long id) {
+    public Telefone getTelefoneById(@PathVariable String id) {
         return telefoneRepository.findById(id).orElse(null);
     }
 
@@ -34,13 +35,13 @@ public class TelefoneController {
     }
 
     @PutMapping("/{id}")
-    public Telefone updateTelefone(@PathVariable Long id, @RequestBody Telefone telefone) {
+    public Telefone updateTelefone(@PathVariable String id, @RequestBody Telefone telefone) {
         telefone.setId(id);
         return telefoneRepository.save(telefone);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTelefone(@PathVariable Long id) {
+    public void deleteTelefone(@PathVariable String id) {
         telefoneRepository.deleteById(id);
     }
 }

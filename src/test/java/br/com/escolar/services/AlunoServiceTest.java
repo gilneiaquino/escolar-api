@@ -53,7 +53,7 @@ public class AlunoServiceTest {
 
     @Test
     public void testBuscarAlunoPorId() {
-        Long id = 1L;
+        String id = "1L";
         Aluno aluno = new Aluno();
         aluno.setId(id);
         when(alunoRepository.findById(id)).thenReturn(Optional.of(aluno));
@@ -65,7 +65,7 @@ public class AlunoServiceTest {
 
     @Test
     public void testExcluirAluno() {
-        Long id = 1L;
+        String id = "1L";
 
         alunoService.excluirAluno(id);
 

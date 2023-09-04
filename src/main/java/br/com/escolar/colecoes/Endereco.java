@@ -1,5 +1,6 @@
 package br.com.escolar.colecoes;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Endereco {
 
     @Id
-    private Long id;
+    private String id;
 
     private String rua;
     private String numero;
@@ -15,7 +16,7 @@ public class Endereco {
     private String estado;
     private String cep;
 
-    public Endereco(Long id, String rua, String numero, String cidade, String estado, String cep) {
+    public Endereco(String id, String rua, String numero, String cidade, String estado, String cep) {
         this.id = id;
         this.rua = rua;
         this.numero = numero;
@@ -28,11 +29,11 @@ public class Endereco {
         super();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

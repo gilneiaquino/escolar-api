@@ -7,44 +7,40 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Telefone {
 
     @Id
-    private Long id;
+    private String id;
 
-    private  Integer ddd;
-    private Integer numero;
+    private  String ddd;
+    private String numero;
     private String tipo;
 
-    public Telefone(Long id, Integer ddd, Integer numero, String tipo) {
+    public Telefone(String id, String ddd, String numero, String tipo) {
         this.id = id;
         this.ddd = ddd;
         this.numero = numero;
         this.tipo = tipo;
     }
 
-    public Telefone() {
-       super();
-    }
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getDdd() {
+    public String getDdd() {
         return ddd;
     }
 
-    public void setDdd(Integer ddd) {
+    public void setDdd(String ddd) {
         this.ddd = ddd;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

@@ -2,6 +2,7 @@ package br.com.escolar.services;
 
 import br.com.escolar.colecoes.Aluno;
 import br.com.escolar.repositorios.AlunoRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +26,11 @@ public class AlunoService {
         return alunoRepository.findAll();
     }
 
-    public Aluno buscarAlunoPorId(Long id) {
+    public Aluno buscarAlunoPorId(String id) {
         return alunoRepository.findById(id).orElse(null);
     }
 
-    public void excluirAluno(Long id) {
+    public void excluirAluno(String id) {
         alunoRepository.deleteById(id);
     }
 
