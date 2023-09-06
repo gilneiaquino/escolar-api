@@ -26,6 +26,10 @@ public class Aluno {
     @NotNull(message = "O gênero não pode ser nulo.")
     private String genero;
 
+    @NotBlank(message = "A Matricula não pode estar em branco.")
+    @NotNull(message = "A Matricula não pode ser nulo.")
+    private String matricula;
+
     @DBRef
     private List<Endereco> enderecos;
     @DBRef
@@ -36,7 +40,7 @@ public class Aluno {
     private String cpf;
 
     // Construtor com parâmetros
-    public Aluno(String id, String nome, LocalDate dataNascimento, String genero,  List<Endereco>  endereco, List<Telefone> telefones, String email, String cpf) {
+    public Aluno(String id, String nome, LocalDate dataNascimento, String genero,  List<Endereco>  endereco, List<Telefone> telefones, String email, String cpf, String matricula) {
         this.telefones = telefones;
         this.enderecos = endereco;
         this.id = id;
@@ -45,6 +49,15 @@ public class Aluno {
         this.genero = genero;
         this.email = email;
         this.cpf = cpf;
+        this.matricula = matricula;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
     public Aluno() {
