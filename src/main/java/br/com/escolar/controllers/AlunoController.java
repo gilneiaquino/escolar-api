@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,6 +52,21 @@ public class AlunoController {
     @DeleteMapping("/{id}")
     public void excluirAluno(@PathVariable String id) {
         alunoService.excluirAluno(id);
+    }
+
+    @GetMapping("/consultar")
+    public ResponseEntity<List<Aluno>> consultar(
+            @RequestParam(name = "nome", required = false) String nome,
+            @RequestParam(name = "cpf", required = false) String cpf,
+            @RequestParam(name = "matricula", required = false) String matricula) {
+
+        List<Aluno> alunos = alunoService.consultarAlunos(nome, cpf, matricula);
+
+        if (alunos.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(alunos);
+        }
     }
 
 }

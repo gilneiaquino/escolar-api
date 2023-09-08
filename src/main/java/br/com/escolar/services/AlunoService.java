@@ -34,5 +34,8 @@ public class AlunoService {
         alunoRepository.deleteById(id);
     }
 
-    // Outros métodos de serviço conforme necessário
-}
+    public List<Aluno> consultarAlunos(String nome, String cpf, String matricula) {
+        return alunoRepository.buscarAlunosPorNomeCpfMatricula(nome, cpf, matricula);
+    }
+
+ }
