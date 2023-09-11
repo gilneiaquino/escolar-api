@@ -9,6 +9,7 @@ public class Telefone {
     @Id
     private String id;
 
+    private String idAluno;
     private  String ddd;
     private String numero;
     private String tipo;
@@ -50,5 +51,13 @@ public class Telefone {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getIdAluno() {
+        return idAluno;
+    }
+
+    public void setIdAluno(String idAluno) {
+        this.idAluno = idAluno;
     }
 }
