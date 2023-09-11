@@ -38,8 +38,8 @@ public class AlunoController {
         return alunoService.listarTodosAlunos();
     }
 
-    @GetMapping("/{id}")
-    public Aluno buscarAlunoPorId(@PathVariable String id) {
+    @GetMapping("/recuperar/{id}")
+    public Aluno recuperarAlunoPorId(@PathVariable String id) {
         return alunoService.buscarAlunoPorId(id);
     }
 
