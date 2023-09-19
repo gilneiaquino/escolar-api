@@ -1,4 +1,7 @@
 package br.com.escolar.colecoes;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -6,15 +9,30 @@ import java.util.List;
 
 @Document(collection = "cursos")
 public class Curso {
-
     @Id
     private String id;
-    private String nome;
-    private String descricao;
-    private int duracao;
-    private List<Disciplina> disciplinas;
-    private List<Turma> turmas;
-    // Outros atributos
+    private String titulo;
+    private int progresso;
+    private List<String> conquistas;
+    private String descricaoResumida;
+    private String descricaoCompleta;
+    private String cor;
+    private String agrupamento;
+
+    public Curso(String id, String titulo, int progresso, List<String> conquistas, String descricaoResumida, String descricaoCompleta, String cor, String agrupamento) {
+        this.id = id;
+        this.titulo = titulo;
+        this.progresso = progresso;
+        this.conquistas = conquistas;
+        this.descricaoResumida = descricaoResumida;
+        this.descricaoCompleta = descricaoCompleta;
+        this.cor = cor;
+        this.agrupamento = agrupamento;
+    }
+
+    public Curso(){
+        super();
+    }
 
     public String getId() {
         return id;
@@ -24,46 +42,59 @@ public class Curso {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public int getProgresso() {
+        return progresso;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setProgresso(int progresso) {
+        this.progresso = progresso;
     }
 
-    public int getDuracao() {
-        return duracao;
+    public List<String> getConquistas() {
+        return conquistas;
     }
 
-    public void setDuracao(int duracao) {
-        this.duracao = duracao;
+    public void setConquistas(List<String> conquistas) {
+        this.conquistas = conquistas;
     }
 
-    public List<Disciplina> getDisciplinas() {
-        return disciplinas;
+    public String getDescricaoResumida() {
+        return descricaoResumida;
     }
 
-    public void setDisciplinas(List<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
+    public void setDescricaoResumida(String descricaoResumida) {
+        this.descricaoResumida = descricaoResumida;
     }
 
-    public List<Turma> getTurmas() {
-        return turmas;
+    public String getDescricaoCompleta() {
+        return descricaoCompleta;
     }
 
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
+    public void setDescricaoCompleta(String descricaoCompleta) {
+        this.descricaoCompleta = descricaoCompleta;
     }
 
+    public String getCor() {
+        return cor;
+    }
 
-    // Construtores, getters e setters
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public String getAgrupamento() {
+        return agrupamento;
+    }
+
+    public void setAgrupamento(String agrupamento) {
+        this.agrupamento = agrupamento;
+    }
 }

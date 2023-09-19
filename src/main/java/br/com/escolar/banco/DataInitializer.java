@@ -1,9 +1,11 @@
 package br.com.escolar.banco;
 
 import br.com.escolar.colecoes.Aluno;
+import br.com.escolar.colecoes.Curso;
 import br.com.escolar.colecoes.Endereco;
 import br.com.escolar.colecoes.Telefone;
 import br.com.escolar.repositorios.AlunoRepository;
+import br.com.escolar.repositorios.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -16,12 +18,12 @@ import java.util.Arrays;
 @Component
 public class DataInitializer implements CommandLineRunner {
 
-    private final AlunoRepository alunoRepository;
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     @Autowired
-    public DataInitializer(AlunoRepository alunoRepository) {
-        this.alunoRepository = alunoRepository;
-    }
+    private CursoRepository cursoRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -48,5 +50,38 @@ public class DataInitializer implements CommandLineRunner {
        alunoRepository.save(aluno1);
        alunoRepository.save(aluno2);
        alunoRepository.save(aluno3);
+
+
+        Curso curso1 = new Curso();
+        curso1.setTitulo("Curso de Programação");
+        curso1.setProgresso(25);
+        curso1.setConquistas(Arrays.asList("Conquista 1", "Conquista 2"));
+        curso1.setDescricaoResumida("Descrição resumida do curso 1");
+        curso1.setDescricaoCompleta("Descrição completa do curso 1");
+        curso1.setCor("Azul");
+        curso1.setAgrupamento("Agrupamento 1");
+
+        Curso curso2 = new Curso();
+        curso2.setTitulo("Curso de Matemática");
+        curso2.setProgresso(50);
+        curso2.setConquistas(Arrays.asList("Conquista 3", "Conquista 4"));
+        curso2.setDescricaoResumida("Descrição resumida do curso 2");
+        curso2.setDescricaoCompleta("Descrição completa do curso 2");
+        curso2.setCor("Verde");
+        curso2.setAgrupamento("Agrupamento 2");
+
+        Curso curso3 = new Curso();
+        curso3.setTitulo("Curso de História");
+        curso3.setProgresso(75);
+        curso3.setConquistas(Arrays.asList("Conquista 5", "Conquista 6"));
+        curso3.setDescricaoResumida("Descrição resumida do curso 3");
+        curso3.setDescricaoCompleta("Descrição completa do curso 3");
+        curso3.setCor("Vermelho");
+        curso3.setAgrupamento("Agrupamento 3");
+
+        // Salvar os cursos no MongoDB
+        cursoRepository.saveAll(Arrays.asList(curso1, curso2, curso3));
+
+
     }
 }
