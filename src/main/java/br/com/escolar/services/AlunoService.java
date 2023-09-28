@@ -33,14 +33,14 @@ public class AlunoService {
     public Aluno salvarAluno(Aluno aluno) {
         Aluno alunoSalvo = alunoRepository.save(aluno);
         for (Endereco endereco : aluno.getEnderecos()) {
-            endereco.setIdAluno(alunoSalvo.getId());
+           // endereco.setIdAluno(alunoSalvo.getId());
             enderecoRepository.save(endereco);
         }
 
         aluno.getTelefones();
 
         for (Telefone telefone: aluno.getTelefones()) {
-            telefone.setIdAluno(alunoSalvo.getId());
+           // telefone.setIdAluno(alunoSalvo.getId());
             telefoneRepository.save(telefone);
         }
         return aluno;

@@ -10,7 +10,7 @@ public class Endereco {
     @Id
     private String id;
 
-    private String idAluno;
+    private String idUsuario;
 
     private String rua;
     private String numero;
@@ -31,12 +31,12 @@ public class Endereco {
         super();
     }
 
-    public String getIdAluno() {
-        return idAluno;
+    public String getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdAluno(String idAluno) {
-        this.idAluno = idAluno;
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getId() {
