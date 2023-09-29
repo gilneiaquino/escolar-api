@@ -1,6 +1,7 @@
 package br.com.escolar.controllers;
 
 import br.com.escolar.colecoes.Usuario;
+import br.com.escolar.dtos.UsuarioDto;
 import br.com.escolar.services.UsuarioService;
 import br.com.escolar.services.UsuarioService;
 import jakarta.validation.Valid;
@@ -13,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,5 +71,19 @@ public class UsuarioController {
         } else {
             return ResponseEntity.ok(usuarios);
         }
+    }
+
+    @PostMapping("/login")
+    public Usuario login(@Valid @RequestBody UsuarioDto usuarioDto) {
+        Optional<Usuario> usuarioOptional = usuarioService.login(usuarioDto);
+
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+            System.out.println(usuario.getLogin());
+        } else {
+            return null;
+        }
+
+        return null;
     }
 }

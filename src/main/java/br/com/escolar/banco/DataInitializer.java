@@ -125,16 +125,16 @@ public class DataInitializer implements CommandLineRunner {
 
         Usuario usuario3 = new Usuario(
                 "3", // ID
-                "Carlos", // Nome
+                "Mega lima", // Nome
                 LocalDate.of(1988, 7, 25), // Data de Nascimento
                 "Masculino", // Gênero
                 "67890", // Matrícula
                 new ArrayList<>(), // Lista de endereços (vazia)
                 new ArrayList<>(), // Lista de telefones (vazia)
                 "carlos@email.com", // Email
-                "456789123", // CPF
+                "01156561116", // CPF
                 "carlos789", // Login
-                "senha789" // Senha
+                "12345" // Senha
         );
 
 

@@ -3,6 +3,7 @@ package br.com.escolar.services;
 import br.com.escolar.colecoes.Usuario;
 import br.com.escolar.colecoes.Endereco;
 import br.com.escolar.colecoes.Telefone;
+import br.com.escolar.dtos.UsuarioDto;
 import br.com.escolar.repositorios.UsuarioRepository;
 import br.com.escolar.repositorios.EnderecoRepository;
 import br.com.escolar.repositorios.TelefoneRepository;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -75,4 +77,7 @@ public class UsuarioService {
         return usuarioRepository.buscarUsuariosPorNomeCpfMatricula(nome, cpf, matricula);
     }
 
- }
+    public Optional<Usuario> login(UsuarioDto usuarioDto) {
+        return Optional.ofNullable(usuarioRepository.findByCpfAndSenha(usuarioDto.getCpf(), usuarioDto.getSenha()));
+    }
+}

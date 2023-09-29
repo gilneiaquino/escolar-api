@@ -1,8 +1,10 @@
 package br.com.escolar.colecoes;
 
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,7 +13,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Document(collection = "usuarios")
-public class Usuario {
+public class
+Usuario {
 
     @Id
     private String id;
@@ -35,17 +38,17 @@ public class Usuario {
     private List<Endereco> enderecos;
     @DBRef
     private List<Telefone> telefones;
-
+    @Email
     private String email;
-
+    @CPF
     private String cpf;
 
-     private String senha;
+    private String senha;
 
-     private String login;
+    private String login;
 
 
-    public Usuario(String id, String nome, LocalDate dataNascimento, String genero, String matricula, List<Endereco> enderecos, List<Telefone> telefones, String email, String cpf,String login, String senha) {
+    public Usuario(String id, String nome, LocalDate dataNascimento, String genero, String matricula, List<Endereco> enderecos, List<Telefone> telefones, String email, String cpf, String login, String senha) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
