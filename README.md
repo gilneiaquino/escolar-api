@@ -17,21 +17,21 @@ MongoDB \
 /
 https://github.com/gilneiaquino/escolar-api.git
 
-## 2. Navegue até o diretório do projeto:
+### 2. Navegue até o diretório do projeto:
 /
 cd escolar-api
 
-## 3.Inicie o MongoDB com o Docker:
+### 3.Inicie o MongoDB com o Docker:
 
 
 Utilize o Docker Compose para iniciar o MongoDB:
 
-## 4.Build do Projeto:
+### 4.Build do Projeto:
 Execute o comando Maven para construir o projeto:
 
 mvn clean install
 
-## 5. Inicie o aplicativo:
+### 5. Inicie o aplicativo:
 Execute o aplicativo Spring Boot:
 
 mvn spring-boot:run
@@ -42,7 +42,7 @@ O aplicativo estará disponível em http://localhost:8080.
 
 Claro, vou atualizar o README para incluir informações sobre o uso do Docker e do banco de dados MongoDB. Aqui está a versão atualizada:
 
-## Projeto Spring Boot - Escolar API
+### Projeto Spring Boot - Escolar API
 Spring Boot Logo
 
  Bem-vindo ao projeto Escolar API, um exemplo de aplicação Spring Boot para gerenciamento de informações escolares. Esta aplicação é desenvolvida em Java e usa o framework Spring Boot.
