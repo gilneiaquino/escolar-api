@@ -41,7 +41,7 @@ O aplicativo estará disponível em http://localhost:8080.
 
 Claro, vou atualizar o README para incluir informações sobre o uso do Docker e do banco de dados MongoDB. Aqui está a versão atualizada:
 
-# Projeto Spring Boot - Escolar API
+## Projeto Spring Boot - Escolar API
 Spring Boot Logo
 
  Bem-vindo ao projeto Escolar API, um exemplo de aplicação Spring Boot para gerenciamento de informações escolares. Esta aplicação é desenvolvida em Java e usa o framework Spring Boot.
@@ -87,7 +87,7 @@ Copy code
 mvn spring-boot:run
 O aplicativo estará disponível em http://localhost:8080.
 
-# Tecnologias Usadas
+## Tecnologias Usadas
 
 Spring Boot 3.1.5
 Spring Boot Web Starter
