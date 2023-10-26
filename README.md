@@ -17,7 +17,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar:
 
 1. **Clone este repositório para o seu ambiente local:**
 
-'https://github.com/gilneiaquino/escolar-api.git'bash
+'https://github.com/gilneiaquino/escolar-api.git'
  
 
 2. ** Navegue até o diretório do projeto:**
