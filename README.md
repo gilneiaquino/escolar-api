@@ -4,7 +4,7 @@ Bem-vindo ao projeto Escolar API, um exemplo de aplicação Spring Boot para ger
 Esta aplicação é desenvolvida em Java e usa o framework Spring Boot.
 
 # Pré-requisitos
-Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar:\
+Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar: \
 
 Java 17 \
 Maven \
