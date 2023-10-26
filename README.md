@@ -1,20 +1,25 @@
 # Projeto Spring Boot - Escolar API
 
+![Spring Boot Logo](https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg)
+
+
 Bem-vindo ao projeto Escolar API, um exemplo de aplicação Spring Boot para gerenciamento de informações escolares exemplo: cadastro de curso e gestão de usuários entre outros. \
 Esta aplicação é desenvolvida em Java e usa o framework Spring Boot.
 
-# Pré-requisitos
-Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar: \
+## Pré-requisitos
 
-Java 17 \
-Maven \
-Docker \
-MongoDB \
+Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar:
 
-# Configuração do Projeto
+- [Java 17](https://adoptopenjdk.net/)
+- [Maven](https://maven.apache.org/)
+- [Docker](https://www.docker.com/)
+- [MongoDB](https://www.mongodb.com/)
 
-### 1. Clone este repositório para o seu ambiente local:
-/
+
+## Configuração do Projeto
+
+1. **Clone este repositório para o seu ambiente local:**
+   ```bash
 https://github.com/gilneiaquino/escolar-api.git
 
 ### 2. Navegue até o diretório do projeto:
