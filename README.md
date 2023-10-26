@@ -13,24 +13,25 @@ MongoDB \
 
 # Configuração do Projeto
 
-# 1. Clone este repositório para o seu ambiente local:
-
+## 1. Clone este repositório para o seu ambiente local:
+/
 https://github.com/gilneiaquino/escolar-api.git
 
-# 2. Navegue até o diretório do projeto:
+## 2. Navegue até o diretório do projeto:
+/
 cd escolar-api
 
-# 3.Inicie o MongoDB com o Docker:
+## 3.Inicie o MongoDB com o Docker:
 
 
 Utilize o Docker Compose para iniciar o MongoDB:
 
-# 4.Build do Projeto:
+## 4.Build do Projeto:
 Execute o comando Maven para construir o projeto:
 
 mvn clean install
 
-# 5. Inicie o aplicativo:
+## 5. Inicie o aplicativo:
 Execute o aplicativo Spring Boot:
 
 mvn spring-boot:run
