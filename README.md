@@ -106,11 +106,11 @@ MongoDB (Banco de Dados)
 # Endpoints da API
 Descreva os principais endpoints da sua API e como usá-los. Por exemplo:
 
-GET /api/usuarios: Recupera a lista de usuários.
-POST /api/usuarios: Cria um novo usuário.
-GET /api/usuarios/{id}: Recupera um usuário por ID.
-PUT /api/usuarios/{id}: Atualiza um usuário por ID.
-DELETE /api/usuarios/{id}: Exclui um usuário por ID.
+GET /api/usuarios: Recupera a lista de usuários. <br>
+POST /api/usuarios: Cria um novo usuário.<br>
+GET /api/usuarios/{id}: Recupera um usuário por ID.<br>
+PUT /api/usuarios/{id}: Atualiza um usuário por ID.<br>
+DELETE /api/usuarios/{id}: Exclui um usuário por ID.<br>
 
 # Documentação
 Documente as informações adicionais relevantes sobre o seu projeto aqui.
