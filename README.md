@@ -103,7 +103,7 @@ Spring Boot Starter Validation
 Spring Boot Starter Security
 MongoDB (Banco de Dados)
 
-# Endpoints da API
+## Endpoints da API
 Descreva os principais endpoints da sua API e como usá-los. Por exemplo:
 
 GET /api/usuarios: Recupera a lista de usuários. <br>
