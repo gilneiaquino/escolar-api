@@ -1,15 +1,15 @@
 # Projeto Spring Boot - Escolar API
 
-Bem-vindo ao projeto Escolar API, um exemplo de aplicação Spring Boot para gerenciamento de informações escolares exemplo: cadastro de curso e gestão de usuários entre outros. 
+Bem-vindo ao projeto Escolar API, um exemplo de aplicação Spring Boot para gerenciamento de informações escolares exemplo: cadastro de curso e gestão de usuários entre outros. <br/>
 Esta aplicação é desenvolvida em Java e usa o framework Spring Boot.
 
 # Pré-requisitos
-Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar:
+Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar: <br/>
 
-Java 17 
-Maven
-Docker
-MongoDB
+Java 17 <br/>
+Maven <br/>
+Docker <br/>
+MongoDB<br/>
 
 # Configuração do Projeto
 
