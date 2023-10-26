@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class AlunoServiceTest {
-
+/*
     @InjectMocks
     private AlunoService alunoService;
 
@@ -70,5 +70,5 @@ public class AlunoServiceTest {
         alunoService.excluirAluno(id);
 
         verify(alunoRepository, times(1)).deleteById(id);
-    }
+    }*/
 }

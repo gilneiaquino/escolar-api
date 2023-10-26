@@ -3,19 +3,24 @@ package br.com.escolar.dtos;
 import jakarta.validation.constraints.NotEmpty;
 
 public class UsuarioDto {
-    private String nomeUsuario;
+    private String nome;
 
     @NotEmpty
     private String senha;
     private String email;
     private String cpf;
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public UsuarioDto(String nomeUsuario, String senha) {
+        this.nome = nomeUsuario;
+        this.senha = senha;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getSenha() {

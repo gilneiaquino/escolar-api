@@ -2,10 +2,12 @@ package br.com.escolar.repositorios;
 
 import br.com.escolar.colecoes.Aluno;
 import br.com.escolar.colecoes.Usuario;
+import br.com.escolar.dtos.UsuarioDto;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UsuarioRepository extends MongoRepository<Usuario, String> {
     Usuario findByEmail(String email);
@@ -18,4 +20,7 @@ public interface UsuarioRepository extends MongoRepository<Usuario, String> {
 
     Usuario findByCpfAndSenha(String cpf, String senha);
 
- }
+    Optional<Usuario> findByNome(String nomeUsuario);
+
+
+}

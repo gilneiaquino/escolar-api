@@ -26,8 +26,6 @@ public class UsuarioService {
     private EnderecoRepository enderecoRepository;
 
 
-
-
     @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -42,7 +40,7 @@ public class UsuarioService {
 
         usuario.getTelefones();
 
-        for (Telefone telefone: usuario.getTelefones()) {
+        for (Telefone telefone : usuario.getTelefones()) {
             telefone.setIdUsuario(usuarioSalvo.getId());
             telefoneRepository.save(telefone);
         }
@@ -79,5 +77,24 @@ public class UsuarioService {
 
     public Optional<Usuario> login(UsuarioDto usuarioDto) {
         return Optional.ofNullable(usuarioRepository.findByCpfAndSenha(usuarioDto.getCpf(), usuarioDto.getSenha()));
+    }
+
+    public UsuarioDto findByNomeUsuario(String nomeUsuario) {
+        Optional<Usuario> usuarioDtoOptional = usuarioRepository.findByNome
+                (nomeUsuario);
+
+        if (usuarioDtoOptional.isPresent()) {
+            Usuario usuario = usuarioDtoOptional.get();
+            return usuarioToUsuarioDto(usuario);
+        }
+
+        return null;
+    }
+
+    public UsuarioDto usuarioToUsuarioDto(Usuario usuario) {
+        return new UsuarioDto(
+                usuario.getNome(),
+                usuario.getSenha()
+        );
     }
 }
