@@ -21,23 +21,23 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar:
 
 2. **Navegue até o diretório do projeto:**
  
-cd escolar-api
+ cd escolar-api
 
-3.**Inicie o MongoDB com o Docker:**
+3. **Inicie o MongoDB com o Docker:**
 
-Utilize o Docker Compose para iniciar o MongoDB:
+ Utilize o Docker Compose para iniciar o MongoDB:
 
 4. **Build do Projeto:**
-Execute o comando Maven para construir o projeto:
+ Execute o comando Maven para construir o projeto:
 
-mvn clean install
+  mvn clean install
 
 5. **Inicie o aplicativo:**
 Execute o aplicativo Spring Boot:
 
-<code>
-mvn spring-boot:run
-</code>
+ 
+  mvn spring-boot:run
+ 
 
 O aplicativo estará disponível em http://localhost:8080.
 
