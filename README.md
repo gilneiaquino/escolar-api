@@ -16,13 +16,11 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar:
 ## Configuração do Projeto
 
 1. **Clone este repositório para o seu ambiente local:**
-   /
-`bash
-'https://github.com/gilneiaquino/escolar-api.git'
-`
+ 
+  'https://github.com/gilneiaquino/escolar-api.git'
 
-3. ** Navegue até o diretório do projeto:**
-/
+3. **Navegue até o diretório do projeto:**
+ 
 cd escolar-api
 
 ### 3.Inicie o MongoDB com o Docker:
