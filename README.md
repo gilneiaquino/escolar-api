@@ -13,7 +13,7 @@ MongoDB \
 
 # Configuração do Projeto
 
-## 1. Clone este repositório para o seu ambiente local:
+### 1. Clone este repositório para o seu ambiente local:
 /
 https://github.com/gilneiaquino/escolar-api.git
 
