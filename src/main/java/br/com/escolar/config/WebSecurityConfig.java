@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -19,14 +22,12 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/").permitAll()
-                .requestMatchers("/usuarios/login").permitAll()
-
+                .requestMatchers("/api/usuarios/login").permitAll()
                 .requestMatchers("/user/cadastro").hasAuthority(ADMIN)
                 .anyRequest().authenticated()
         ).formLogin((form) -> form
                 .loginPage("http://localhost:3000/login")
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("http://localhost:3000/", true)
                 .failureUrl("/login-error")
                 .permitAll()
         ).logout((logout) -> logout
@@ -53,4 +54,19 @@ public class WebSecurityConfig {
                 .and()
                 .build();
     }
+
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.addAllowedOrigin("http://localhost:3000");
+//        configuration.addAllowedHeader("*");
+//        configuration.addAllowedMethod("*");
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//
+//        return source;
+//    }
+
+
 }
