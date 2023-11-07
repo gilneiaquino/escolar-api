@@ -64,6 +64,14 @@ public class UsuarioController {
             @RequestParam(name = "cpf", required = false) String cpf,
             @RequestParam(name = "matricula", required = false) String matricula) {
 
+        if (cpf == null) {
+            cpf = ""; // Defina um valor padrão ou deixe em branco, dependendo dos requisitos.
+        }
+
+        if (matricula == null) {
+            matricula = ""; // Defina um valor padrão ou deixe em branco, dependendo dos requisitos.
+        }
+
         List<Usuario> usuarios = usuarioService.consultarUsuarios(nome, cpf, matricula);
 
         if (usuarios.isEmpty()) {
@@ -74,15 +82,15 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public Usuario login(@Valid @RequestBody UsuarioDto usuarioDto) {
-        Optional<Usuario> usuarioOptional = usuarioService.login(usuarioDto);
-
-        if (usuarioOptional.isPresent()) {
-            Usuario usuario = usuarioOptional.get();
-            System.out.println(usuario.getLogin());
-        } else {
-            return null;
-        }
+    public Usuario login() {
+//        Optional<Usuario> usuarioOptional = usuarioService.login(usuarioDto);
+//
+//        if (usuarioOptional.isPresent()) {
+//            Usuario usuario = usuarioOptional.get();
+//            System.out.println(usuario.getLogin());
+//        } else {
+//            return null;
+//        }
 
         return null;
     }
