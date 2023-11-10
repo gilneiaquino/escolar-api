@@ -81,7 +81,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/login")
+    @GetMapping("/autenticacao")
     public Usuario login() {
 //        Optional<Usuario> usuarioOptional = usuarioService.login(usuarioDto);
 //

@@ -2,6 +2,7 @@ package br.com.escolar.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -13,7 +14,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/api/usuarios/login").permitAll()
+                        .requestMatchers("/api/usuarios/autenticacao").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin((form) -> form
                         .loginPage("http://localhost:3000/login")
