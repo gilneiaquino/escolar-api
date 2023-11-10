@@ -81,7 +81,7 @@ public class UsuarioController {
         }
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public Usuario login() {
 //        Optional<Usuario> usuarioOptional = usuarioService.login(usuarioDto);
 //
