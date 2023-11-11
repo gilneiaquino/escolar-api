@@ -18,7 +18,7 @@ public interface UsuarioRepository extends MongoRepository<Usuario, String> {
             "AND (:matricula IS NULL OR a.matricula = :matricula)")
     List<Usuario> buscarUsuariosPorNomeCpfMatricula(String nome, String cpf, String matricula);
 
-    Usuario findByCpfAndSenha(String cpf, String senha);
+    Usuario findByEmailAndSenha(String email, String senha);
 
     Optional<Usuario> findByNome(String nomeUsuario);
 

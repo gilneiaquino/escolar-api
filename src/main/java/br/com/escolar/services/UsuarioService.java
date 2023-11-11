@@ -76,7 +76,7 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> login(UsuarioDto usuarioDto) {
-        return Optional.ofNullable(usuarioRepository.findByCpfAndSenha(usuarioDto.getCpf(), usuarioDto.getSenha()));
+        return Optional.ofNullable(usuarioRepository.findByEmailAndSenha(usuarioDto.getEmail(), usuarioDto.getSenha()));
     }
 
     public UsuarioDto findByNomeUsuario(String nomeUsuario) {
