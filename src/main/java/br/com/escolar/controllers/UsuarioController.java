@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -32,11 +33,11 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping
-    public Usuario criarUsuario(@Valid @RequestBody Usuario usuario) {
-        return usuarioService.salvarUsuario(usuario);
+    @PostMapping("/cadastro")
+    public ResponseEntity<Usuario> criarUsuario(@Valid @RequestBody Usuario usuario) {
+        Usuario novoUsuario = usuarioService.salvarUsuario(usuario);
+        return new ResponseEntity<>(novoUsuario, HttpStatus.CREATED);
     }
-
     @GetMapping
     public List<Usuario> listarUsuarios() {
         return usuarioService.listarTodosUsuarios();
@@ -87,7 +88,7 @@ public class UsuarioController {
 
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
-            System.out.println(usuario.getLogin());
+            System.out.println(usuario.getEmail());
         }
         return null;
     }

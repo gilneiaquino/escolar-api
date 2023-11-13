@@ -101,7 +101,6 @@ public class DataInitializer implements CommandLineRunner {
                 new ArrayList<>(), // Lista de telefones (vazia)
                 "joao@email.com", // Email
                 "123456789", // CPF
-                "joao123", // Login
                 "senha123" // Senha
         );
 
@@ -116,7 +115,6 @@ public class DataInitializer implements CommandLineRunner {
                 new ArrayList<>(), // Lista de telefones (vazia)
                 "maria@email.com", // Email
                 "987654321", // CPF
-                "maria456", // Login
                 "senha456" // Senha
         );
 
@@ -130,7 +128,6 @@ public class DataInitializer implements CommandLineRunner {
                 new ArrayList<>(), // Lista de telefones (vazia)
                 "carlos@email.com", // Email
                 "01156561116", // CPF
-                "carlos789", // Login
                 "12345" // Senha
         );
 

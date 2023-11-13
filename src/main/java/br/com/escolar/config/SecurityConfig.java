@@ -20,10 +20,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf
-                .ignoringRequestMatchers("/api/usuarios/*")
+                .ignoringRequestMatchers("/api/usuarios/autenticacao")
+                .ignoringRequestMatchers("/api/usuarios/cadastro")
+
         );
         http.authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/usuarios/autenticacao").permitAll()
+                        .requestMatchers("/api/usuarios/cadastro").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin((form) -> form
                         .loginPage("http://localhost:3000/login")
@@ -46,7 +49,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

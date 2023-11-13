@@ -45,10 +45,7 @@ Usuario {
 
     private String senha;
 
-    private String login;
-
-
-    public Usuario(String id, String nome, LocalDate dataNascimento, String genero, String matricula, List<Endereco> enderecos, List<Telefone> telefones, String email, String cpf, String login, String senha) {
+    public Usuario(String id, String nome, LocalDate dataNascimento, String genero, String matricula, List<Endereco> enderecos, List<Telefone> telefones, String email, String cpf, String senha) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -59,7 +56,6 @@ Usuario {
         this.email = email;
         this.cpf = cpf;
         this.senha = senha;
-        this.login = login;
     }
 
     public String getId() {
@@ -142,11 +138,4 @@ Usuario {
         this.senha = senha;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
 }
