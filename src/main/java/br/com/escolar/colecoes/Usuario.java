@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Document(collection = "usuarios")
 public class
@@ -40,7 +41,7 @@ Usuario {
     private List<Telefone> telefones;
 
     @DBRef
-    private  Perfil perfil;
+    private Perfil perfil;
     @Email
     private String email;
     @CPF
@@ -48,7 +49,7 @@ Usuario {
 
     private String senha;
 
-    public Usuario(String id, String nome, LocalDate dataNascimento, String genero, String matricula, List<Endereco> enderecos, List<Telefone> telefones, String email, String cpf, String senha) {
+    public Usuario(String id, String nome, LocalDate dataNascimento, String genero, String matricula, List<Endereco> enderecos, List<Telefone> telefones, String email, String cpf, String senha, Perfil perfil) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -59,6 +60,7 @@ Usuario {
         this.email = email;
         this.cpf = cpf;
         this.senha = senha;
+        this.perfil = perfil;
     }
 
     public String getId() {
@@ -141,4 +143,11 @@ Usuario {
         this.senha = senha;
     }
 
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
 }

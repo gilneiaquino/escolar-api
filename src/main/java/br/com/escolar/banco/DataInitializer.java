@@ -34,8 +34,6 @@ public class DataInitializer implements CommandLineRunner {
         carregarAlunos();
         carregarCursos();
         carregarListaUsuario();
-        carregarListaPerfis();
-
     }
 
     private void carregarAlunos() {
@@ -95,20 +93,6 @@ public class DataInitializer implements CommandLineRunner {
         cursoRepository.saveAll(Arrays.asList(curso1, curso2, curso3));
     }
 
-    public void carregarListaPerfis() {
-        // Crie alguns perfis
-        Perfil perfilAdmin = new Perfil();
-        perfilAdmin.setNome("ROLE_ADMIN");
-        perfilRepository.save(perfilAdmin);
-
-        Perfil perfilUsuario = new Perfil();
-        perfilUsuario.setNome("ROLE_USER");
-        perfilRepository.save(perfilUsuario);
-
-        perfilRepository.save(perfilAdmin);
-        perfilRepository.save(perfilUsuario);
-
-    }
 
     public void carregarListaUsuario() {
 
@@ -122,7 +106,8 @@ public class DataInitializer implements CommandLineRunner {
                 new ArrayList<>(), // Lista de telefones (vazia)
                 "joao@email.com", // Email
                 "123456789", // CPF
-                "senha123" // Senha
+                "senha123", // Senha
+                new Perfil("1", "ROLE_ADMIN")
         );
 
 
@@ -136,7 +121,8 @@ public class DataInitializer implements CommandLineRunner {
                 new ArrayList<>(), // Lista de telefones (vazia)
                 "maria@email.com", // Email
                 "987654321", // CPF
-                "senha456" // Senha
+                "senha456", // Senha
+                new Perfil("2", "ROLE_ALUNO")
         );
 
         Usuario usuario3 = new Usuario(
@@ -149,7 +135,9 @@ public class DataInitializer implements CommandLineRunner {
                 new ArrayList<>(), // Lista de telefones (vazia)
                 "carlos@email.com", // Email
                 "01156561116", // CPF
-                "12345" // Senha
+                "12345", // Senha
+                new Perfil("2", "ROLE_PROFESSOR")
+
         );
 
 
