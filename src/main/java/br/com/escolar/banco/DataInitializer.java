@@ -3,6 +3,7 @@ package br.com.escolar.banco;
 import br.com.escolar.colecoes.*;
 import br.com.escolar.repositorios.AlunoRepository;
 import br.com.escolar.repositorios.CursoRepository;
+import br.com.escolar.repositorios.PerfilRepository;
 import br.com.escolar.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,12 +25,17 @@ public class DataInitializer implements CommandLineRunner {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PerfilRepository perfilRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
         carregarAlunos();
         carregarCursos();
         carregarListaUsuario();
+        carregarListaPerfis();
+
     }
 
     private void carregarAlunos() {
@@ -87,6 +93,21 @@ public class DataInitializer implements CommandLineRunner {
 
         // Salvar os cursos no MongoDB
         cursoRepository.saveAll(Arrays.asList(curso1, curso2, curso3));
+    }
+
+    public void carregarListaPerfis() {
+        // Crie alguns perfis
+        Perfil perfilAdmin = new Perfil();
+        perfilAdmin.setNome("ROLE_ADMIN");
+        perfilRepository.save(perfilAdmin);
+
+        Perfil perfilUsuario = new Perfil();
+        perfilUsuario.setNome("ROLE_USER");
+        perfilRepository.save(perfilUsuario);
+
+        perfilRepository.save(perfilAdmin);
+        perfilRepository.save(perfilUsuario);
+
     }
 
     public void carregarListaUsuario() {

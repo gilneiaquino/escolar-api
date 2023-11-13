@@ -38,6 +38,9 @@ Usuario {
     private List<Endereco> enderecos;
     @DBRef
     private List<Telefone> telefones;
+
+    @DBRef
+    private  Perfil perfil;
     @Email
     private String email;
     @CPF
