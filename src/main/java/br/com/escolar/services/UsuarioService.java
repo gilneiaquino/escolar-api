@@ -7,8 +7,8 @@ import br.com.escolar.dtos.UsuarioDto;
 import br.com.escolar.repositorios.UsuarioRepository;
 import br.com.escolar.repositorios.EnderecoRepository;
 import br.com.escolar.repositorios.TelefoneRepository;
-import br.com.escolar.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +25,9 @@ public class UsuarioService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository) {
@@ -32,6 +35,8 @@ public class UsuarioService {
     }
 
     public Usuario salvarUsuario(Usuario usuario) {
+         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
         for (Endereco endereco : usuario.getEnderecos()) {
             endereco.setIdUsuario(usuarioSalvo.getId());
