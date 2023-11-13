@@ -81,17 +81,14 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/autenticacao")
+    @PostMapping("/autenticacao")
     public Usuario login(UsuarioDto usuarioDto) {
         Optional<Usuario> usuarioOptional = usuarioService.login(usuarioDto);
 
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
             System.out.println(usuario.getLogin());
-        } else {
-            return null;
         }
-
         return null;
     }
 }
