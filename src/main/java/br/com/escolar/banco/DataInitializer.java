@@ -5,6 +5,7 @@ import br.com.escolar.repositorios.AlunoRepository;
 import br.com.escolar.repositorios.CursoRepository;
 import br.com.escolar.repositorios.PerfilRepository;
 import br.com.escolar.repositorios.UsuarioRepository;
+import br.com.escolar.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ public class DataInitializer implements CommandLineRunner {
     private CursoRepository cursoRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioService usuarioService;
 
     @Autowired
     private PerfilRepository perfilRepository;
@@ -141,7 +142,10 @@ public class DataInitializer implements CommandLineRunner {
         );
 
 
-        usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2, usuario3));
+        usuarioService.salvarUsuario(usuario1);
+        usuarioService.salvarUsuario(usuario2);
+        usuarioService.salvarUsuario(usuario3);
+
 
 
     }

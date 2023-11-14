@@ -1,6 +1,8 @@
 package br.com.escolar.controllers;
 
 import br.com.escolar.colecoes.Usuario;
+import br.com.escolar.config.JwtResponse;
+import br.com.escolar.config.JwtTokenUtil;
 import br.com.escolar.dtos.UsuarioDto;
 import br.com.escolar.services.UsuarioService;
 import br.com.escolar.services.UsuarioService;
@@ -27,6 +29,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     public UsuarioController(UsuarioService usuarioService) {
@@ -38,6 +42,7 @@ public class UsuarioController {
         Usuario novoUsuario = usuarioService.salvarUsuario(usuario);
         return new ResponseEntity<>(novoUsuario, HttpStatus.CREATED);
     }
+
     @GetMapping
     public List<Usuario> listarUsuarios() {
         return usuarioService.listarTodosUsuarios();
@@ -83,13 +88,15 @@ public class UsuarioController {
     }
 
     @PostMapping("/autenticacao")
-    public Usuario login(UsuarioDto usuarioDto) {
+    public ResponseEntity<JwtResponse> login(@Valid @RequestBody UsuarioDto usuarioDto) {
         Optional<Usuario> usuarioOptional = usuarioService.login(usuarioDto);
 
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
-            System.out.println(usuario.getEmail());
+            String token = jwtTokenUtil.generateToken(usuario.getEmail());
+            return ResponseEntity.ok(new JwtResponse(token));
+        } else {
+            return ResponseEntity.badRequest().build();
         }
-        return null;
     }
 }

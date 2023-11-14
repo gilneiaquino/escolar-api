@@ -81,8 +81,18 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> login(UsuarioDto usuarioDto) {
-        return Optional.ofNullable(usuarioRepository.findByEmailAndSenha(usuarioDto.getEmail(), usuarioDto.getSenha()));
+        Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(usuarioDto.getEmail());
+
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+            if (passwordEncoder.matches(usuarioDto.getSenha(), usuario.getSenha())) {
+                return Optional.of(usuario);
+            }
+        }
+
+        return Optional.empty();
     }
+
 
     public UsuarioDto findByNomeUsuario(String nomeUsuario) {
         Optional<Usuario> usuarioDtoOptional = usuarioRepository.findByNome

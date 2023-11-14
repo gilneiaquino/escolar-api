@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -18,16 +20,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByEmail(email);
+        Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(email);
 
-        if (usuario == null) {
+        if (usuarioOptional.isEmpty()) {
             throw new UsernameNotFoundException("Usuário não encontrado com o email: " + email);
         }
 
-        return User.builder()
-                .username(usuario.getEmail())
-                .password(usuario.getSenha())
-                .authorities((GrantedAuthority) usuario.getPerfil())
+            return User.builder()
+                .username(usuarioOptional.get().getEmail())
+                .password(usuarioOptional.get().getSenha())
+                .authorities((GrantedAuthority) usuarioOptional.get().getPerfil())
                 .build();
     }
 }

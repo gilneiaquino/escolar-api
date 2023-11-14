@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioRepository extends MongoRepository<Usuario, String> {
-    Usuario findByEmail(String email);
+    Optional<Usuario> findByEmail(String email);
 
     @Query("SELECT a FROM Aluno a " +
             "WHERE (:nome IS NULL OR a.nome = :nome) " +
