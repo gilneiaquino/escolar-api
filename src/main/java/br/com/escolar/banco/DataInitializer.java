@@ -4,7 +4,6 @@ import br.com.escolar.colecoes.*;
 import br.com.escolar.repositorios.AlunoRepository;
 import br.com.escolar.repositorios.CursoRepository;
 import br.com.escolar.repositorios.PerfilRepository;
-import br.com.escolar.repositorios.UsuarioRepository;
 import br.com.escolar.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +16,7 @@ import java.util.Arrays;
 @Component
 public class DataInitializer implements CommandLineRunner {
 
+    public static final String MASCULINO = "Masculino";
     @Autowired
     private AlunoRepository alunoRepository;
 
@@ -42,7 +42,7 @@ public class DataInitializer implements CommandLineRunner {
         Telefone telefoneAluno1 = new Telefone("1", "14", "33147897", "Celular");
 
 
-        Aluno aluno1 = new Aluno("1", "Marcos", LocalDate.of(1998, 05, 11), "Masculino", Arrays.asList(enderecoAluno1), Arrays.asList(telefoneAluno1), "teste@teste1.com", "01145461148", "123456");
+        Aluno aluno1 = new Aluno("1", "Marcos", LocalDate.of(1998, 05, 11), MASCULINO, Arrays.asList(enderecoAluno1), Arrays.asList(telefoneAluno1), "teste@teste1.com", "01145461148", "123456");
 
         Endereco enderecoAluno2 = new Endereco("2L", "25", "Rua B", "Cidade B", "Estado B", "54321-876");
         Telefone telefoneAluno2 = new Telefone("2L", "11", "42553218", "Fixo");
@@ -54,7 +54,7 @@ public class DataInitializer implements CommandLineRunner {
         Telefone telefoneAluno3 = new Telefone("3L", "61", "32553255", "Celular");
 
 
-        Aluno aluno3 = new Aluno("3", "Pedro", LocalDate.of(2024, 05, 28), "Masculino", Arrays.asList(enderecoAluno3), Arrays.asList(telefoneAluno3), "teste@teste3.com", "01145461177", "6798797987");
+        Aluno aluno3 = new Aluno("3", "Pedro", LocalDate.of(2024, 05, 28), MASCULINO, Arrays.asList(enderecoAluno3), Arrays.asList(telefoneAluno3), "teste@teste3.com", "01145461177", "6798797987");
 
         // Salve os alunos no banco de dados
         alunoRepository.save(aluno1);
@@ -101,7 +101,7 @@ public class DataInitializer implements CommandLineRunner {
                 "1", // ID
                 "João", // Nome
                 LocalDate.of(1990, 1, 15), // Data de Nascimento
-                "Masculino", // Gênero
+                MASCULINO, // Gênero
                 "12345", // Matrícula
                 new ArrayList<>(), // Lista de endereços (vazia)
                 new ArrayList<>(), // Lista de telefones (vazia)
@@ -130,7 +130,7 @@ public class DataInitializer implements CommandLineRunner {
                 "3", // ID
                 "Mega lima", // Nome
                 LocalDate.of(1988, 7, 25), // Data de Nascimento
-                "Masculino", // Gênero
+                MASCULINO, // Gênero
                 "67890", // Matrícula
                 new ArrayList<>(), // Lista de endereços (vazia)
                 new ArrayList<>(), // Lista de telefones (vazia)
