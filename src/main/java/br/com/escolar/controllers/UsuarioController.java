@@ -88,7 +88,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/autenticacao")
-    public ResponseEntity<JwtResponse> login(@Valid @RequestBody UsuarioDto usuarioDto) {
+    public ResponseEntity<?> login(@Valid @RequestBody UsuarioDto usuarioDto) {
         Optional<Usuario> usuarioOptional = usuarioService.login(usuarioDto);
 
         if (usuarioOptional.isPresent()) {
@@ -96,7 +96,8 @@ public class UsuarioController {
             String token = jwtTokenUtil.generateToken(usuario.getEmail());
             return ResponseEntity.ok(new JwtResponse(token));
         } else {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Credenciais inválidas ou usuário não encontrado");
         }
     }
+
 }
