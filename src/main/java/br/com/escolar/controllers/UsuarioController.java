@@ -13,9 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,26 +71,15 @@ public class UsuarioController {
 
     @GetMapping("/consultar")
     public ResponseEntity<List<Usuario>> consultar(
-            @RequestParam(name = "nome", required = false) String nome,
-            @RequestParam(name = "cpf", required = false) String cpf,
-            @RequestParam(name = "matricula", required = false) String matricula) {
-
-        if (cpf == null) {
-            cpf = ""; // Defina um valor padrão ou deixe em branco, dependendo dos requisitos.
-        }
-
-        if (matricula == null) {
-            matricula = ""; // Defina um valor padrão ou deixe em branco, dependendo dos requisitos.
-        }
+            @RequestParam(name = "nome", defaultValue = "") String nome,
+            @RequestParam(name = "cpf", defaultValue = "") String cpf,
+            @RequestParam(name = "matricula", defaultValue = "") String matricula) {
 
         List<Usuario> usuarios = usuarioService.consultarUsuarios(nome, cpf, matricula);
 
-        if (usuarios.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(usuarios);
-        }
+        return usuarios.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(usuarios);
     }
+
 
     @PostMapping("/autenticacao")
     public ResponseEntity<?> login(@Valid @RequestBody UsuarioDto usuarioDto) {
@@ -94,6 +88,7 @@ public class UsuarioController {
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
             String token = jwtTokenUtil.generateToken(usuario.getEmail());
+
             return ResponseEntity.ok(new JwtResponse(token));
         } else {
             return ResponseEntity.badRequest().body("Credenciais inválidas ou usuário não encontrado");
