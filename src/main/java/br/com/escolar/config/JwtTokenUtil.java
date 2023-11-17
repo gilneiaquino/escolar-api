@@ -1,9 +1,6 @@
 package br.com.escolar.config;
 
 
-import java.util.Date;
-import java.util.function.Function;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -12,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.util.Date;
+import java.util.function.Function;
 
 
 @Component
