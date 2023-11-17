@@ -3,7 +3,7 @@ package br.com.escolar.services;
 import br.com.escolar.colecoes.Usuario;
 import br.com.escolar.colecoes.Endereco;
 import br.com.escolar.colecoes.Telefone;
-import br.com.escolar.dtos.UsuarioDto;
+import br.com.escolar.dtos.LoginDto;
 import br.com.escolar.repositorios.UsuarioRepository;
 import br.com.escolar.repositorios.EnderecoRepository;
 import br.com.escolar.repositorios.TelefoneRepository;
@@ -80,7 +80,7 @@ public class UsuarioService {
         return usuarioRepository.buscarUsuariosPorNomeCpfMatricula(nome, cpf, matricula);
     }
 
-    public Optional<Usuario> login(UsuarioDto usuarioDto) {
+    public Optional<Usuario> login(LoginDto usuarioDto) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(usuarioDto.getEmail());
 
         if (usuarioOptional.isPresent()) {
@@ -94,7 +94,7 @@ public class UsuarioService {
     }
 
 
-    public UsuarioDto findByNomeUsuario(String nomeUsuario) {
+    public LoginDto findByNomeUsuario(String nomeUsuario) {
         Optional<Usuario> usuarioDtoOptional = usuarioRepository.findByNome
                 (nomeUsuario);
 
@@ -106,8 +106,8 @@ public class UsuarioService {
         return null;
     }
 
-    public UsuarioDto usuarioToUsuarioDto(Usuario usuario) {
-        return new UsuarioDto(
+    public LoginDto usuarioToUsuarioDto(Usuario usuario) {
+        return new LoginDto(
                 usuario.getNome(),
                 usuario.getSenha()
         );

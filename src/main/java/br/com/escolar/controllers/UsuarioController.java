@@ -3,7 +3,7 @@ package br.com.escolar.controllers;
 import br.com.escolar.colecoes.Usuario;
 import br.com.escolar.config.JwtResponse;
 import br.com.escolar.config.JwtTokenUtil;
-import br.com.escolar.dtos.UsuarioDto;
+import br.com.escolar.dtos.LoginDto;
 import br.com.escolar.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,8 +72,8 @@ public class UsuarioController {
 
 
     @PostMapping("/autenticacao")
-    public ResponseEntity<?> login(@Valid @RequestBody UsuarioDto usuarioDto) {
-        Optional<Usuario> usuarioOptional = usuarioService.login(usuarioDto);
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDto loginDto) {
+        Optional<Usuario> usuarioOptional = usuarioService.login(loginDto);
 
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();

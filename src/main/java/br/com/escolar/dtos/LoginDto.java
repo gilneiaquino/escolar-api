@@ -2,7 +2,7 @@ package br.com.escolar.dtos;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class UsuarioDto {
+public class LoginDto {
 
     @NotEmpty
     private String senha;
@@ -11,7 +11,7 @@ public class UsuarioDto {
     private String email;
 
 
-    public UsuarioDto(String email, String senha) {
+    public LoginDto(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }

@@ -30,14 +30,14 @@ public class SecurityConfig {
                    http.cors(Customizer.withDefaults());
 
         http.csrf((csrf) -> csrf
-                .ignoringRequestMatchers("/api/usuarios/autenticacao")
+                .ignoringRequestMatchers("/api/logins/autenticacao")
                 .ignoringRequestMatchers("/api/usuarios/cadastro")
 
         );
        http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenUtil,userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/api/usuarios/autenticacao").permitAll()
+                        .requestMatchers("/api/logins/autenticacao").permitAll()
                         .requestMatchers("/api/usuarios/cadastro").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin((form) -> form
