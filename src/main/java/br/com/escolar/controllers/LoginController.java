@@ -1,6 +1,7 @@
 package br.com.escolar.controllers;
 
 import br.com.escolar.colecoes.Usuario;
+import br.com.escolar.config.EmailService;
 import br.com.escolar.config.JwtResponse;
 import br.com.escolar.config.JwtTokenUtil;
 import br.com.escolar.dtos.LoginDto;
@@ -9,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -26,10 +24,13 @@ public class LoginController {
     private final UsuarioService usuarioService;
     private final JwtTokenUtil jwtTokenUtil;
 
+    private final EmailService emailService;
+
     @Autowired
-    public LoginController(UsuarioService usuarioService, JwtTokenUtil jwtTokenUtil) {
+    public LoginController(UsuarioService usuarioService, JwtTokenUtil jwtTokenUtil , EmailService emailService) {
         this.usuarioService = usuarioService;
         this.jwtTokenUtil = jwtTokenUtil;
+        this.emailService = emailService;
     }
 
     @PostMapping("/autenticacao")
@@ -44,4 +45,14 @@ public class LoginController {
             return ResponseEntity.badRequest().body(CREDENCIAIS_INVALIDAS_OU_USUARIO_NAO_ENCONTRADO);
         }
     }
+
+    @PostMapping("/esqueci-senha")
+    public ResponseEntity<String> esqueciMinhaSenha(@RequestParam("email") String email) {
+        String tokenDefinicaoSenha = jwtTokenUtil.generateToken(email);
+        emailService.enviarEmailComToken(tokenDefinicaoSenha,email);
+        return ResponseEntity.ok("Email de redefinição de senha enviado com sucesso.");
+    }
+
+
+
 }
