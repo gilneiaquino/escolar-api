@@ -32,6 +32,8 @@ public class SecurityConfig {
         http.csrf((csrf) -> csrf
                 .ignoringRequestMatchers("/api/logins/autenticacao")
                 .ignoringRequestMatchers("/api/usuarios/cadastro")
+                .ignoringRequestMatchers("/api/logins/esqueci-senha")
+
 
         );
        http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenUtil,userDetailsService), UsernamePasswordAuthenticationFilter.class);
@@ -39,6 +41,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/logins/autenticacao").permitAll()
                         .requestMatchers("/api/usuarios/cadastro").permitAll()
+                        .requestMatchers("/api/logins/esqueci-senha").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin((form) -> form
                         .loginPage("http://localhost:3000/login")
