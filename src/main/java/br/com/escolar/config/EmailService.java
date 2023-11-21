@@ -1,5 +1,6 @@
 package br.com.escolar.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 public class EmailService {
 
     private final JavaMailSender javaMailSender;
+    @Value("${app.base-url}")
+    private String baseUrl;
 
     public EmailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -16,19 +19,25 @@ public class EmailService {
     public void enviarEmailComToken(String destinatario, String token) {
         String assunto = "Recuperação de Senha - Token de Verificação";
         String corpo = construirCorpoEmail(token);
-
         enviarEmail(destinatario, assunto, corpo);
     }
 
     private String construirCorpoEmail(String token) {
+        String linkRedefinicaoSenha = gerarLinkRedefinicaoSenha(token);
+        String linkDefinicao = "\n\nClique no link a seguir para redefinir sua senha:\n" + linkRedefinicaoSenha;
+
         StringBuilder corpo = new StringBuilder();
         corpo.append("Olá,\n\n")
-                .append("Você solicitou a recuperação de senha. Utilize o seguinte token para redefinir sua senha: ")
-                .append(token).append("\n\n")
+                .append("Você solicitou a recuperação de senha. Utilize o seguinte link para redefinir sua senha: ")
+                .append("\n\n").append(linkDefinicao).append("\n\n")
                 .append("Atenciosamente,\n")
                 .append("Equipe Escolar");
 
         return corpo.toString();
+    }
+
+    private String gerarLinkRedefinicaoSenha(String token) {
+        return baseUrl + "/redefinir-senha?token=" + token;
     }
 
     private void enviarEmail(String destinatario, String assunto, String corpo) {

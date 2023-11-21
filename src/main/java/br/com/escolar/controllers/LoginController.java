@@ -46,7 +46,7 @@ public class LoginController {
         }
     }
 
-    @PostMapping("/esqueci-senha")
+    @GetMapping("/esqueci-senha")
     public ResponseEntity<String> esqueciMinhaSenha(@RequestParam  String email) {
         String tokenDefinicaoSenha = jwtTokenUtil.generateToken(email);
         emailService.enviarEmailComToken(email, tokenDefinicaoSenha);
