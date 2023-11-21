@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 public class EmailService {
 
     private final JavaMailSender javaMailSender;
-    @Value("${app.base-url}")
-    private String baseUrl;
 
+    @Value("${app.base-url-servidor-spring}")
+    private String baseUrlServidorSpring;
     public EmailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
@@ -37,7 +37,7 @@ public class EmailService {
     }
 
     private String gerarLinkRedefinicaoSenha(String token) {
-        return baseUrl + "/redefinir-senha?token=" + token;
+        return baseUrlServidorSpring + "/redefinir-senha?token=" + token;
     }
 
     private void enviarEmail(String destinatario, String assunto, String corpo) {
