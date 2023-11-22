@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -43,7 +44,9 @@ Usuario {
     @DBRef
     private Perfil perfil;
     @Email
+    @Indexed(unique = true)
     private String email;
+
     @CPF
     private String cpf;
 

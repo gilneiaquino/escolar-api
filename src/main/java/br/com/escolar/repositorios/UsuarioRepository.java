@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioRepository extends MongoRepository<Usuario, String> {
-    Optional<Usuario> findByEmail(String email);
+    Optional<Usuario> findByEmailIgnoreCase(String email);
 
-    @Query("SELECT a FROM Aluno a " +
+    @Query("SELECT a FROM Usuario a " +
             "WHERE (:nome IS NULL OR a.nome = :nome) " +
             "AND (:cpf IS NULL OR a.cpf = :cpf) " +
             "AND (:matricula IS NULL OR a.matricula = :matricula)")

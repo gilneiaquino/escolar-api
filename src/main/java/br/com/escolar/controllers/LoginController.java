@@ -6,14 +6,22 @@ import br.com.escolar.config.JwtResponse;
 import br.com.escolar.config.JwtTokenUtil;
 import br.com.escolar.dtos.LoginDto;
 import br.com.escolar.services.UsuarioService;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -59,17 +67,27 @@ public class LoginController {
 
     @GetMapping("/redefinir-senha")
     public ResponseEntity<String> redefinirSenha(@RequestParam("token") String token) {
-        if (token != null && jwtTokenUtil.validateToken(token, jwtTokenUtil.extractUsername(token))) {
-            String redirectUrl = baseUrlServidorReact + "/alterar-minha-senha";
-            return ResponseEntity.status(HttpStatus.FOUND)
-                    .header("Location", redirectUrl)
-                    .body("Redirecionando para a página de alteração de senha...");
-        } else {
+        if (token == null || !jwtTokenUtil.validateToken(token, jwtTokenUtil.extractUsername(token))) {
             String invalidTokenUrl = baseUrlServidorReact + "/token-invalido";
             return ResponseEntity.status(HttpStatus.FOUND)
                     .header("Location", invalidTokenUrl)
                     .body("Redirecionando para a página de token inválido...");
         }
+
+        String email = jwtTokenUtil.extractUsername(token);
+        Optional<Usuario> usuarioOptional = usuarioService.findByEmail(email);
+
+        if (usuarioOptional.isPresent()) {
+            String redirectUrl = baseUrlServidorReact + "/alterar-minha-senha";
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header("Location", redirectUrl)
+                    .body("Redirecionando para a página de alteração de senha...");
+        }
+
+        String invalidTokenUrl = baseUrlServidorReact + "/token-invalido";
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .header("Location", invalidTokenUrl)
+                .body("Redirecionando para a página de token inválido...");
     }
 
 

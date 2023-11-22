@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.util.Date;
 import java.util.function.Function;
 
@@ -17,17 +18,22 @@ import java.util.function.Function;
 public class JwtTokenUtil {
 
     // Gerar uma chave segura para o algoritmo HS512
-    SecretKey secret = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
     @Value("${jwt.expiration}")
     private Long expiration;
 
+    public SecretKey secretKey() {
+        byte[] apiKeySecretBytes = jwtSecret.getBytes();
+        return new SecretKeySpec(apiKeySecretBytes, "HMACSHA256");
+    }
     public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .signWith(SignatureAlgorithm.HS512, secretKey())
                 .compact();
     }
 
@@ -45,7 +51,7 @@ public class JwtTokenUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(secretKey()).parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token) {

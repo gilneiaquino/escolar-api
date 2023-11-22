@@ -81,7 +81,7 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> login(LoginDto usuarioDto) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(usuarioDto.getEmail());
+        Optional<Usuario> usuarioOptional = usuarioRepository.findByEmailIgnoreCase(usuarioDto.getEmail());
 
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
@@ -112,4 +112,9 @@ public class UsuarioService {
                 usuario.getSenha()
         );
     }
+
+    public Optional<Usuario>  findByEmail(String email){
+        return usuarioRepository.findByEmailIgnoreCase(email);
+    }
+
 }

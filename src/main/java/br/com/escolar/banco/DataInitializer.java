@@ -141,10 +141,27 @@ public class DataInitializer implements CommandLineRunner {
 
         );
 
+        Usuario usuario4 = new Usuario(
+                "4", // ID
+                "Mega lima", // Nome
+                LocalDate.of(1988, 7, 25), // Data de Nascimento
+                MASCULINO, // Gênero
+                "67890", // Matrícula
+                new ArrayList<>(), // Lista de endereços (vazia)
+                new ArrayList<>(), // Lista de telefones (vazia)
+                "gilnei.aquino@gmail.com", // Email
+                "01156561116", // CPF
+                "12345", // Senha
+                new Perfil("2", "ROLE_PROFESSOR")
+
+        );
+
 
         usuarioService.salvarUsuario(usuario1);
         usuarioService.salvarUsuario(usuario2);
         usuarioService.salvarUsuario(usuario3);
+        usuarioService.salvarUsuario(usuario4);
+
 
 
 

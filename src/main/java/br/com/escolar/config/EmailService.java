@@ -37,7 +37,7 @@ public class EmailService {
     }
 
     private String gerarLinkRedefinicaoSenha(String token) {
-        return baseUrlServidorSpring + "/redefinir-senha?token=" + token;
+        return baseUrlServidorSpring + "/api/logins/redefinir-senha?token=" + token;
     }
 
     private void enviarEmail(String destinatario, String assunto, String corpo) {
