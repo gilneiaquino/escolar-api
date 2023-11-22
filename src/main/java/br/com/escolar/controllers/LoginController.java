@@ -4,24 +4,19 @@ import br.com.escolar.colecoes.Usuario;
 import br.com.escolar.config.EmailService;
 import br.com.escolar.config.JwtResponse;
 import br.com.escolar.config.JwtTokenUtil;
+import br.com.escolar.config.MessageUtil;
 import br.com.escolar.dtos.LoginDto;
+import br.com.escolar.dtos.SenhaDto;
 import br.com.escolar.services.UsuarioService;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -38,11 +33,14 @@ public class LoginController {
 
     private final EmailService emailService;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    public LoginController(UsuarioService usuarioService, JwtTokenUtil jwtTokenUtil , EmailService emailService) {
+    public LoginController(UsuarioService usuarioService, JwtTokenUtil jwtTokenUtil, EmailService emailService, PasswordEncoder passwordEncoder) {
         this.usuarioService = usuarioService;
         this.jwtTokenUtil = jwtTokenUtil;
         this.emailService = emailService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/autenticacao")
@@ -59,7 +57,7 @@ public class LoginController {
     }
 
     @GetMapping("/esqueci-senha")
-    public ResponseEntity<String> esqueciMinhaSenha(@RequestParam  String email) {
+    public ResponseEntity<String> esqueciMinhaSenha(@RequestParam String email) {
         String tokenDefinicaoSenha = jwtTokenUtil.generateToken(email);
         emailService.enviarEmailComToken(email, tokenDefinicaoSenha);
         return ResponseEntity.ok("Email de redefinição de senha enviado com sucesso.");
@@ -88,6 +86,29 @@ public class LoginController {
         return ResponseEntity.status(HttpStatus.FOUND)
                 .header("Location", invalidTokenUrl)
                 .body("Redirecionando para a página de token inválido...");
+    }
+
+    @PutMapping("/alterar-senha")
+    public ResponseEntity<String> alterarSenha(@RequestBody SenhaDto senhaDto) {
+        Optional<Usuario> usuarioOptional = usuarioService.findByEmail(senhaDto.getEmail());
+
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+
+            if (!passwordEncoder.matches(senhaDto.getSenhaAtual(), usuario.getSenha())) {
+                return ResponseEntity.badRequest().body(MessageUtil.getMessage("senha.incorreta"));
+            }
+
+            if (!senhaDto.getNovaSenha().equals(senhaDto.getConfirmarSenha())) {
+                return ResponseEntity.badRequest().body(MessageUtil.getMessage("nova.senha.confirmacao"));
+            }
+
+            usuario.setSenha(passwordEncoder.encode(senhaDto.getNovaSenha()));
+            usuarioService.salvarUsuario(usuario);
+            return ResponseEntity.ok(MessageUtil.getMessage("senha.alterada.sucesso"));
+        }
+
+        return ResponseEntity.badRequest().body(MessageUtil.getMessage("falha.alterar.senha"));
     }
 
 

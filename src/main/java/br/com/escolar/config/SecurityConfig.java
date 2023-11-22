@@ -34,6 +34,8 @@ public class SecurityConfig {
                 .ignoringRequestMatchers("/api/usuarios/cadastro")
                 .ignoringRequestMatchers("/api/logins/esqueci-senha")
                 .ignoringRequestMatchers("/api/logins/redefinir-senha")
+                .ignoringRequestMatchers("/api/logins/alterar-senha")
+
 
 
 
@@ -45,6 +47,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/usuarios/cadastro").permitAll()
                         .requestMatchers("/api/logins/esqueci-senha").permitAll()
                         .requestMatchers("/api/logins/redefinir-senha").permitAll()
+                        .requestMatchers("/api/logins/alterar-senha").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin((form) -> form
                         .loginPage("http://localhost:3000/login")
