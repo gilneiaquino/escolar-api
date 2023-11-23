@@ -1,19 +1,6 @@
 package br.com.escolar.services;
 
-import br.com.escolar.colecoes.Aluno;
-import br.com.escolar.repositorios.AlunoRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 public class AlunoServiceTest {
 /*

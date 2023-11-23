@@ -95,7 +95,7 @@ public class LoginController {
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
 
-            if (!passwordEncoder.matches(senhaDto.getSenhaAtual(), usuario.getSenha())) {
+            if (passwordEncoder.matches(passwordEncoder.encode(senhaDto.getSenhaAtual()), usuario.getSenha())) {
                 return ResponseEntity.badRequest().body(MessageUtil.getMessage("senha.incorreta"));
             }
 
