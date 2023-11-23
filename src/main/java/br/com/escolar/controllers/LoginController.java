@@ -76,7 +76,7 @@ public class LoginController {
         Optional<Usuario> usuarioOptional = usuarioService.findByEmail(email);
 
         if (usuarioOptional.isPresent()) {
-            String redirectUrl = baseUrlServidorReact + "/alterar-minha-senha";
+            String redirectUrl = baseUrlServidorReact + "/alterar-minha-senha?email=" + email; // Adiciona o email como parâmetro na URL
             return ResponseEntity.status(HttpStatus.FOUND)
                     .header("Location", redirectUrl)
                     .body("Redirecionando para a página de alteração de senha...");
@@ -88,6 +88,7 @@ public class LoginController {
                 .body("Redirecionando para a página de token inválido...");
     }
 
+
     @PutMapping("/alterar-senha")
     public ResponseEntity<String> alterarSenha(@RequestBody SenhaDto senhaDto) {
         Optional<Usuario> usuarioOptional = usuarioService.findByEmail(senhaDto.getEmail());
@@ -95,7 +96,7 @@ public class LoginController {
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
 
-            if (passwordEncoder.matches(passwordEncoder.encode(senhaDto.getSenhaAtual()), usuario.getSenha())) {
+            if (!passwordEncoder.matches(senhaDto.getSenhaAtual(), usuario.getSenha())) {
                 return ResponseEntity.badRequest().body(MessageUtil.getMessage("senha.incorreta"));
             }
 
@@ -103,13 +104,14 @@ public class LoginController {
                 return ResponseEntity.badRequest().body(MessageUtil.getMessage("nova.senha.confirmacao"));
             }
 
-            usuario.setSenha(passwordEncoder.encode(senhaDto.getNovaSenha()));
+            usuario.setSenha(senhaDto.getNovaSenha());
             usuarioService.salvarUsuario(usuario);
             return ResponseEntity.ok(MessageUtil.getMessage("senha.alterada.sucesso"));
         }
 
         return ResponseEntity.badRequest().body(MessageUtil.getMessage("falha.alterar.senha"));
     }
+
 
 
 
