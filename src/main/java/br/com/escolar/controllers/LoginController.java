@@ -76,7 +76,7 @@ public class LoginController {
         Optional<Usuario> usuarioOptional = usuarioService.findByEmail(email);
 
         if (usuarioOptional.isPresent()) {
-            String redirectUrl = baseUrlServidorReact + "/alterar-minha-senha?email=" + email; // Adiciona o email como parâmetro na URL
+            String redirectUrl = baseUrlServidorReact + "/alterar-minha-senha?email=" + email + "&token=" + token;
             return ResponseEntity.status(HttpStatus.FOUND)
                     .header("Location", redirectUrl)
                     .body("Redirecionando para a página de alteração de senha...");
@@ -87,6 +87,7 @@ public class LoginController {
                 .header("Location", invalidTokenUrl)
                 .body("Redirecionando para a página de token inválido...");
     }
+
 
 
     @PutMapping("/alterar-senha")
