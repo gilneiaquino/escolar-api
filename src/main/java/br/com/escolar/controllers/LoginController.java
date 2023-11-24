@@ -74,7 +74,7 @@ public class LoginController {
         Optional<Usuario> usuarioOptional = usuarioService.findByEmail(email);
 
         if (usuarioOptional.isPresent()) {
-            String redirectUrl = baseUrlServidorReact + "/alterar-minha-senha?email=" + email + "&token=" + token;
+            String redirectUrl = baseUrlServidorReact + "/recuperar-minha-senha?email=" + email + "&token=" + token;
             return ResponseEntity.status(HttpStatus.FOUND)
                     .header("Location", redirectUrl)
                     .body("Redirecionando para a página de alteração de senha...");
@@ -111,6 +111,32 @@ public class LoginController {
         return ResponseEntity.badRequest().body(MessageUtil.getMessage("falha.alterar.senha"));
     }
 
+    @PutMapping("/alterar-senha-recuperada")
+    public ResponseEntity<String> alterarSenhaRecuperada(@RequestBody SenhaDto senhaDto, @RequestHeader("Authorization") String token) {
+        if (token == null || !jwtTokenUtil.validateToken(token, jwtTokenUtil.extractUsername(token))) {
+            String invalidTokenUrl = baseUrlServidorReact + "/token-invalido";
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header("Location", invalidTokenUrl)
+                    .body("Redirecionando para a página de token inválido...");
+        }
+
+        String email = jwtTokenUtil.extractUsername(token);
+        Optional<Usuario> usuarioOptional = usuarioService.findByEmail(email);
+
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+
+            if (!senhaDto.getNovaSenha().equals(senhaDto.getConfirmarSenha())) {
+                return ResponseEntity.badRequest().body(MessageUtil.getMessage("nova.senha.confirmacao"));
+            }
+
+            usuario.setSenha(senhaDto.getNovaSenha());
+            usuarioService.salvarUsuario(usuario);
+            return ResponseEntity.ok(MessageUtil.getMessage("senha.alterada.sucesso"));
+        }
+
+        return ResponseEntity.badRequest().body(MessageUtil.getMessage("falha.alterar.senha"));
+    }
 
 
 
