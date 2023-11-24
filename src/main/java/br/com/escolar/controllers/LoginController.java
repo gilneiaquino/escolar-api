@@ -26,8 +26,6 @@ public class LoginController {
 
     @Value("${app.base-url-servidor-react}")
     private String baseUrlServidorReact;
-    public static final String CREDENCIAIS_INVALIDAS_OU_USUARIO_NAO_ENCONTRADO = "Credenciais inválidas ou usuário não encontrado";
-
     private final UsuarioService usuarioService;
     private final JwtTokenUtil jwtTokenUtil;
 
@@ -52,7 +50,7 @@ public class LoginController {
             String token = jwtTokenUtil.generateToken(usuario.getEmail());
             return ResponseEntity.ok(new JwtResponse(token));
         } else {
-            return ResponseEntity.badRequest().body(CREDENCIAIS_INVALIDAS_OU_USUARIO_NAO_ENCONTRADO);
+            return ResponseEntity.badRequest().body(MessageUtil.getMessage("credencial.invalida"));
         }
     }
 
