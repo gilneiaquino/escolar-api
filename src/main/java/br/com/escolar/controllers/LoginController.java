@@ -1,5 +1,6 @@
 package br.com.escolar.controllers;
 
+import br.com.escolar.colecoes.InvalidToken;
 import br.com.escolar.colecoes.Usuario;
 import br.com.escolar.config.EmailService;
 import br.com.escolar.config.JwtResponse;
@@ -7,15 +8,19 @@ import br.com.escolar.config.JwtTokenUtil;
 import br.com.escolar.config.MessageUtil;
 import br.com.escolar.dtos.LoginDto;
 import br.com.escolar.dtos.SenhaDto;
+import br.com.escolar.repositorios.InvalidTokenRepository;
 import br.com.escolar.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
@@ -23,6 +28,7 @@ import java.util.Optional;
 @RequestMapping(value = "/api/logins", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
 public class LoginController {
+
 
     @Value("${app.base-url-servidor-react}")
     private String baseUrlServidorReact;
@@ -33,12 +39,18 @@ public class LoginController {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final InvalidTokenRepository invalidTokenRepository;
+
+    private static final Logger logger = LogManager.getLogger(LoginController.class);
+
+
     @Autowired
-    public LoginController(UsuarioService usuarioService, JwtTokenUtil jwtTokenUtil, EmailService emailService, PasswordEncoder passwordEncoder) {
+    public LoginController(UsuarioService usuarioService, JwtTokenUtil jwtTokenUtil, EmailService emailService, PasswordEncoder passwordEncoder, InvalidTokenRepository invalidTokenRepository) {
         this.usuarioService = usuarioService;
         this.jwtTokenUtil = jwtTokenUtil;
         this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
+        this.invalidTokenRepository = invalidTokenRepository;
     }
 
     @PostMapping("/autenticacao")
@@ -115,7 +127,15 @@ public class LoginController {
     public ResponseEntity<String> alterarSenhaRecuperada(@RequestBody SenhaDto senhaDto, @RequestHeader("Authorization") String token) {
         if (token == null || !jwtTokenUtil.validateToken(token, jwtTokenUtil.extractUsername(token))) {
             String invalidTokenUrl = baseUrlServidorReact + "/token-invalido";
-            return ResponseEntity.status(HttpStatus.FOUND)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .header("Location", invalidTokenUrl)
+                    .body("Redirecionando para a página de token inválido...");
+        }
+
+        InvalidToken foundInvalidToken = invalidTokenRepository.findByToken(token);
+        if (foundInvalidToken != null) {
+            String invalidTokenUrl = baseUrlServidorReact + "/token-invalido";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .header("Location", invalidTokenUrl)
                     .body("Redirecionando para a página de token inválido...");
         }
@@ -126,18 +146,26 @@ public class LoginController {
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
 
-            if (!senhaDto.getNovaSenha().equals(senhaDto.getConfirmarSenha())) {
-                return ResponseEntity.badRequest().body(MessageUtil.getMessage("nova.senha.confirmacao"));
-            }
-
             usuario.setSenha(senhaDto.getNovaSenha());
             usuarioService.salvarUsuario(usuario);
+
+            salvarTokenInvalido(token);
+
             return ResponseEntity.ok(MessageUtil.getMessage("senha.alterada.sucesso"));
         }
 
         return ResponseEntity.badRequest().body(MessageUtil.getMessage("falha.alterar.senha"));
     }
 
+    private void salvarTokenInvalido(String token) {
+        try {
+            InvalidToken invalidToken = new InvalidToken();
+            invalidToken.setToken(token);
+            invalidTokenRepository.save(invalidToken);
+        } catch (DataIntegrityViolationException e) {
+            logger.error("Erro ao inserir token inválido: {}", e.getMessage());
+        }
+    }
 
 
 }
